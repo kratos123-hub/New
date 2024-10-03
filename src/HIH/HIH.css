@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.container {
+  padding: 40px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+
+.project-details-right {
+  width: 300px;
+}
+
+.details-box {
+  background-color: #e0e0e0;
+  padding: 5px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: 250px;
+}
+
+.details-box p {
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  margin: 10px 0;
+}
+
+h2 {
+  color: #003366;
+  font-weight: bold;
+  text-align: center;
+}
+
+.section1,
+.section2 {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+h3 {
+  color: #003366;
+  font-size: 24px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#demo {
+  text-align: center;
+  font-size: 22px;
+}
+
+.graph-image-uniform {
+  height: 260px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.container2 h1 {
+  color: #003366;
+  text-align: center;
+}
+
+.container2 .pdf {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.container2 .pdf a {
+  border: 2px solid #003366;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #003366;
+}
+
+.container2 .pdf a:hover {
+  color: #fff;
+  background-color: #000;
+}
+.container2{
+  margin-bottom: 30px;
+}
+.text{
+  width: 450px;
+}
+@media screen and (max-width: 350px){
+  .section1, .section2{
+    flex-wrap: wrap;
+  }
+  .info-row{
+    width: 50px;
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 1148px){
+  .info-row{
+    flex-direction: column;
+  }
+  .text{
+    display: flex;
+    gap: 10px;
+  }
+}
+@media screen and (max-width: 525px){
+  .container{
+    padding: 0 20px ;
+  }
+}

@@ -1,0 +1,9 @@
+.timer-container {
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    text-align: center;
+    padding-top: 20px;
+    gap: 20px;
+  }
+  
