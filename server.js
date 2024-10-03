@@ -1,9 +1,11 @@
 import express from 'express';
-import { Pool } from 'pg';  // Use PostgreSQL library
+import pkg from 'pg';  // Use default import for pg module
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+
+const { Pool } = pkg;  // Destructure Pool from the default import
 
 const app = express();
 app.use(cors());
