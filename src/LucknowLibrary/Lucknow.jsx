@@ -1,5 +1,5 @@
 import React from 'react';
-import './lucknow.css';
+import './Lucknow.css';
 
 const Lucknow = () => {
   return (
