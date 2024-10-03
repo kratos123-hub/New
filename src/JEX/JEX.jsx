@@ -1,5 +1,5 @@
 import React from 'react';
-import './jex.css';
+import './Jex.css';
 import JEXTimer from './JEXT';
 
 const JEX = () => {
