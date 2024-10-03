@@ -111,6 +111,11 @@ app.post('/login', (req, res) => {
     });
 });
 
+// Default route for the root path
+app.get('/', (req, res) => {
+  res.send('Backend service is running.');
+});
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
