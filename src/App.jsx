@@ -54,7 +54,7 @@ function Auth() {
   const strongPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // At least 8 characters, including 1 letter and 1 number
 
   // Set API_URL based on environment
-  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const API_URL = process.env.REACT_APP_API_URL || "https://bootes-backend-e0sx.onrender.com";
 
   // Handle Sign In submission
   const handleSignIn = async (e) => {
