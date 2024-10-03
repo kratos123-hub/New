@@ -16,22 +16,21 @@ import JEX from "./JEX/JEX";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import Projects from "./Projects/Projects.jsx";
-// import MaybeShowNavbar from "./MaybeShowNavbar/MaybeShowNavbar.jsx";
 
 function App() {
   return (
     <Router>
-                <Navbar />
-            <Routes>
-                <Route index element={<Auth />} />
-                <Route path="/Home" element={<Home />} />
-                <Route path="/HIH" element={<HIH />} />
-                <Route path="/Hanumanjee" element={<Hanumanjee />} />
-                <Route path="/Jyotisar" element={<Jyotisar />} />
-                <Route path="/LucknowLibrary" element={<LucknowLibrary />} />
-                <Route path="/JEX" element={<JEX />} />
-                <Route path="/Projects" element={<Projects />} />
-            </Routes>
+      <Navbar />
+      <Routes>
+        <Route index element={<Auth />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/HIH" element={<HIH />} />
+        <Route path="/Hanumanjee" element={<Hanumanjee />} />
+        <Route path="/Jyotisar" element={<Jyotisar />} />
+        <Route path="/LucknowLibrary" element={<LucknowLibrary />} />
+        <Route path="/JEX" element={<JEX />} />
+        <Route path="/Projects" element={<Projects />} />
+      </Routes>
       <Footer />
     </Router>
   );
@@ -54,12 +53,15 @@ function Auth() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const strongPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // At least 8 characters, including 1 letter and 1 number
 
+  // Set API_URL based on environment
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   // Handle Sign In submission
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoginError(""); // Reset any previous errors
 
-    const response = await fetch("http://localhost:5000/login", {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +102,7 @@ function Auth() {
     }
 
     // Call the signup API
-    const response = await fetch("http://localhost:5000/signup", {
+    const response = await fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

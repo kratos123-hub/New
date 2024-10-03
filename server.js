@@ -1,5 +1,5 @@
 import express from 'express';
-import { createConnection } from 'mysql2';
+import { Pool } from 'pg';  // Use PostgreSQL library
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import bodyParser from 'body-parser';
@@ -11,19 +11,23 @@ app.use(bodyParser.json());
 
 const JWT_SECRET = 'your_jwt_secret_key_here';  // Change this to a strong secret
 
-// MySQL Database connection
-const db = createConnection({
-    host: 'localhost',
-    user: 'root',  // Your MySQL username
-    password: 'Vineet@123',  // Your MySQL password
-    database: 'login_system',
+// PostgreSQL Database connection using environment variables
+const db = new Pool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
 });
 
 db.connect((err) => {
-    if (err) throw err;
-    console.log('Connected to MySQL Database!');
+    if (err) {
+        console.error('Error connecting to PostgreSQL Database:', err);
+        process.exit(1);
+    } else {
+        console.log('Connected to PostgreSQL Database!');
+    }
 });
-
 
 // Whitelist of valid Bootes email addresses
 const validBootesEmails = [
@@ -37,8 +41,6 @@ const validBootesEmails = [
     'gaurav.yadav@bootes.in',
     'jitendar.goyal@bootes.in',
 ];
-
-
 
 // **New Signup Route**
 app.post('/signup', (req, res) => {
@@ -65,7 +67,7 @@ app.post('/signup', (req, res) => {
 
         // Insert the user into the database
         db.query(
-            'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+            'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)',  // PostgreSQL uses $1, $2 for placeholders
             [username, email, hashedPassword],
             (err, result) => {
                 if (err) {
@@ -87,14 +89,14 @@ app.post('/login', (req, res) => {
     }
 
     // Check if email is valid and exists in the database
-    db.query('SELECT * FROM users WHERE email = ?', [email], (err, result) => {
+    db.query('SELECT * FROM users WHERE email = $1', [email], (err, result) => {
         if (err) return res.status(500).json({ success: false, message: 'Error fetching user' });
 
-        if (result.length === 0) {
-            return rs.ines.status(400).json({ success: false, message: 'Invalid email or password' });
+        if (result.rows.length === 0) {
+            return res.status(400).json({ success: false, message: 'Invalid email or password' });
         }
 
-        const user = result[0];
+        const user = result.rows[0];
 
         // Compare the password
         bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -108,6 +110,7 @@ app.post('/login', (req, res) => {
 });
 
 // Start the server
-app.listen(5000, () => {
-    console.log('Server running on http://localhost:5000');
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
