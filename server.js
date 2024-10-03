@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const JWT_SECRET = 'your_jwt_secret_key_here';  // Change this to a strong secret
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback_jwt_secret_key';// Change this to a strong secret
 
 // PostgreSQL Database connection using environment variables
 const db = new Pool({
